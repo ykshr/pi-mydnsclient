@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -eu
+
+ip addr flush dev eth0
+ip addr add ${CONTAINER_IP} dev eth0
+ip route add default via ${DEFAULT_GW} dev eth0
+
+user="username"
+pass="password"
+
+while :
+do
+  wget --http-user=${user} \
+          --http-password=${pass} \
+          "http://www.mydns.jp/login.html"
+  sleep 5m
+done
